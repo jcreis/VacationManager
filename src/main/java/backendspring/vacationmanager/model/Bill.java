@@ -19,14 +19,17 @@ public class Bill {
     private List<User> payers;
 
     // List of users who have to pay the bill to the payers
-    private List<User> debters;
+    private List<User> debtors;
 
-    public Bill(String title, String description, double price, List<User> payers, List<User> debters) {
+    public Bill(String title, String description, double price, List<User> payers, List<User> debtors) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.payers = payers;
-        this.debters = debters;
+        this.debtors = debtors;
+    }
+
+    public Bill() {
     }
 
     public long getId() {
@@ -69,11 +72,11 @@ public class Bill {
         this.payers = payers;
     }
 
-    public List<User> getDebters() {
-        return debters;
+    public List<User> getDebtors() {
+        return debtors;
     }
 
-    public void setDebters(List<User> debters) {
-        this.debters = debters;
+    public void setDebtors(List<User> debtors) {
+        this.debtors = debtors;
     }
 }

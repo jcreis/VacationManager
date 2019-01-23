@@ -25,6 +25,9 @@ public class User {
         this.toReceive = toReceive;
     }
 
+    public User() {
+    }
+
     public long getId() {
         return id;
     }

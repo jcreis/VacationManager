@@ -21,6 +21,9 @@ public class Vacation {
     private List<Bill> bills;
 
 
+    public Vacation() {
+    }
+
     public long getId() {
         return id;
     }

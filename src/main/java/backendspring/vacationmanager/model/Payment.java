@@ -17,6 +17,9 @@ public class Payment {
         this.fromUser = fromUser;
     }
 
+    public Payment() {
+    }
+
     public long getId() {
         return id;
     }
