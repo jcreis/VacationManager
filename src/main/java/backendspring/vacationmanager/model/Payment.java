@@ -12,9 +12,14 @@ public class Payment {
 
     private double total;
 
-    public Payment(double total, User fromUser) {
+    private User fromUser;
+
+    private User toUser;
+
+    public Payment(double total, User fromUser, User toUser) {
         this.total = total;
         this.fromUser = fromUser;
+        this.toUser = toUser;
     }
 
     public Payment() {
@@ -44,5 +49,11 @@ public class Payment {
         this.fromUser = fromUser;
     }
 
-    private User fromUser;
+    public User getToUser() {
+        return toUser;
+    }
+
+    public void setToUser(User toUser) {
+        this.toUser = toUser;
+    }
 }
