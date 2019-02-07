@@ -1,7 +1,6 @@
 package backendspring.vacationmanager.controller;
 
 import backendspring.vacationmanager.model.Vacation;
-//import backendspring.vacationmanager.repository.VacationsRepository;
 import backendspring.vacationmanager.repository.VacationsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -15,6 +15,9 @@ public class UserController {
     @Autowired
     UsersRepository users;
 
+
+
+    //                ----------------------- G E T S -----------------------
     // GET /
     // GET /{id}
     // GET /{id}/debts
@@ -36,10 +39,25 @@ public class UserController {
         return users.findById(id);
     }
 
+
+
+
+    //                ----------------------- P O S T S -----------------------
+    // POST /
+    // POST /{id}/debts
+    // POST /{id}/toreceive
+
     @PostMapping("")
     public void createUser(@RequestBody User user) {
         users.save(user);
     }
+
+
+
+    //                ----------------------- P U T S -----------------------
+    // PUT /{id}
+    // PUT /{id}/debts/{did}
+    // PUT /{id}/toreceive/{trid}
 
     @PutMapping("/{id}")
     public void updateUser(@PathVariable("id") long id, @RequestBody User user) {
@@ -56,6 +74,15 @@ public class UserController {
             System.out.println("Bad Request");
         }
     }
+
+
+
+
+    //                ----------------------- D E L E T E S -----------------------
+    // DELETE /
+    // DELETE /{id}
+    // DELETE /{id}/debts/{did}
+    // DELETE /{id}/toreceive/{trid}
 
 
     @DeleteMapping("/{id}")
@@ -75,6 +102,7 @@ public class UserController {
 
 }
     /*
+
     @GetMapping("/{id}/debts")
     public List<Payment> getDebtsFromUser(@PathVariable("id") long id){
         return null;
@@ -86,9 +114,9 @@ public class UserController {
     }
 
 
-    // POST /
-    // POST /{id}/debts
-    // POST /{id}/toreceive
+
+
+
 
     @PostMapping("")
     public User addUser(@RequestBody User user){
@@ -106,9 +134,11 @@ public class UserController {
     }
 
 
-    // PUT /{id}
-    // PUT /{id}/debts/{did}
-    // PUT /{id}/toreceive/{trid}
+
+
+
+
+
 
     @PutMapping("/{id}")
     public User updateUser(@PathVariable("id") long id, @RequestBody User user){
@@ -126,10 +156,10 @@ public class UserController {
     }
 
 
-    // DELETE /
-    // DELETE /{id}
-    // DELETE /{id}/debts/{did}
-    // DELETE /{id}/toreceive/{trid}
+
+
+
+
 
 
 
