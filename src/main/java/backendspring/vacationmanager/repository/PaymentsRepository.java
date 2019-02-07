@@ -1,4 +1,3 @@
-/*
 package backendspring.vacationmanager.repository;
 
 
@@ -12,10 +11,7 @@ public interface PaymentsRepository extends CrudRepository<Payment, Long> {
     @Query("SELECT p "
             + "FROM Payment p "
             + "WHERE p.id LIKE CONCAT('%',:search,'%') "
-            + "OR p.title LIKE CONCAT('%',:search,'%') "
-            + "OR p.text LIKE CONCAT('%',:search,'%') "
-            + "OR p.creationDate LIKE CONCAT('%',:search,'%') "
+            + "OR p.total LIKE CONCAT('%',:search,'%') "
     )
     Iterable<Payment> searchPayments(@Param(value = "search") String search);
 }
-*/

@@ -3,12 +3,11 @@ package backendspring.vacationmanager.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.List;
 
-//@Entity
+@Entity
 public class Bill {
 
-    //@GeneratedValue @Id
+    @GeneratedValue @Id
     private long id;
 
     private String title;
@@ -16,17 +15,17 @@ public class Bill {
     private double price;
 
     // List of users who paid the bill in the first place
-    private List<User> payers;
+    //private List<User> payers;
 
     // List of users who have to pay the bill to the payers
-    private List<User> debtors;
+    //private List<User> debtors;
 
-    public Bill(String title, String description, double price, List<User> payers, List<User> debtors) {
+    public Bill(String title, String description, double price/*, List<User> payers, List<User> debtors*/) {
         this.title = title;
         this.description = description;
         this.price = price;
-        this.payers = payers;
-        this.debtors = debtors;
+        //this.payers = payers;
+        //this.debtors = debtors;
     }
 
     public Bill() {
@@ -63,7 +62,7 @@ public class Bill {
     public void setPrice(double price) {
         this.price = price;
     }
-
+/*
     public List<User> getPayers() {
         return payers;
     }
@@ -78,5 +77,5 @@ public class Bill {
 
     public void setDebtors(List<User> debtors) {
         this.debtors = debtors;
-    }
+    }*/
 }

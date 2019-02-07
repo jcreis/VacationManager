@@ -14,6 +14,8 @@ public class VacationController {
     @Autowired
     VacationsRepository vacations;
 
+
+    //                ----------------------- G E T S -----------------------
     @GetMapping("")
     public Iterable<Vacation> getAllVacations(@RequestParam(required = false) String search){
 
@@ -38,6 +40,9 @@ public class VacationController {
         return vacations.findById(id);
     }
 
+
+    //                ----------------------- P O S T S -----------------------
+
     @PostMapping("")
     public void createVacation(@RequestBody Vacation vacation){
 
@@ -46,6 +51,9 @@ public class VacationController {
         vacations.save(vacation);
 
     }
+
+
+    //                ----------------------- P U T S -----------------------
 
     @PutMapping("/{id}")
     public void updateVacation(@PathVariable("id") long id, @RequestBody Vacation vacation){
@@ -67,6 +75,8 @@ public class VacationController {
         return;
     }
 
+
+    //                ----------------------- D E L E T E S -----------------------
 
 
     @DeleteMapping("/{id}")

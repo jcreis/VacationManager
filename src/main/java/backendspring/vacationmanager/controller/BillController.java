@@ -1,15 +1,19 @@
-/*
 package backendspring.vacationmanager.controller;
 
 import backendspring.vacationmanager.model.Bill;
-import backendspring.vacationmanager.model.User;
+import backendspring.vacationmanager.repository.BillsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @RestController @RequestMapping("/bills")
 public class BillController {
 
+    @Autowired
+    BillsRepository bills;
+
+    //                ----------------------- G E T S -----------------------
     // GET /
     // GET /{id}
     // GET /{id}/users
@@ -18,18 +22,80 @@ public class BillController {
     // GET /{id}/payers
 
     @GetMapping("")
-    public List<Bill> getAllBills(@RequestParam (required = false) String search){
-        return null;
+    public Iterable<Bill> getAllBills(@RequestParam (required = false) String search){
+        if(search == null){
+            return bills.findAll();
+        }
+        else{
+            return bills.searchBills(search);
+        }
     }
 
 
     @GetMapping("/{id}")
-    public Bill getBillById(@PathVariable ("id") long id){
-        return null;
+    public Optional<Bill> getBillById(@PathVariable ("id") long id){
+        return bills.findById(id);
     }
 
 
-    @GetMapping("/{id}/users")
+    //                ----------------------- P O S T S -----------------------
+    // POST /
+    // POST /{id}/users
+    // POST /{id}/payers
+    // POST /{id}/debtors
+
+    @PostMapping("")
+    public void addBill(@RequestBody Bill bill){
+        bills.save(bill);
+    }
+
+    //                ----------------------- P U T S -----------------------
+
+    // PUT /{id}
+    // PUT /{id}/users/{uid}
+    // PUT /{id}/debtors/{did}
+    // PUT /{id}/payers/{pid}
+
+    @PutMapping("/{id}")
+    public void updateBill(@PathVariable("id") long id, @RequestBody Bill bill){
+        if(bill.getId() == id){
+            Optional<Bill> old_b = bills.findById(id);
+            if(old_b.isPresent()){
+                bills.save(bill);
+            }
+            else{
+                System.out.println("Not found.");
+            }
+        }
+        else{
+            System.out.println("Bad Request.");
+        }
+        return;
+    }
+
+
+    //                ----------------------- D E L E T E S -----------------------
+    // DELETE /{id}
+    // DELETE /{id}/users/{uid}
+    // DELETE /{id}/payers/{pid}
+    // DELETE /{id}/debtors/{did}
+
+    @DeleteMapping("/{id}")
+    public void deleteBillById(@PathVariable("id") long id){
+        Optional<Bill> old_b = bills.findById(id);
+        if(old_b.isPresent()){
+            bills.delete(old_b.get());
+        }
+        else{
+            System.out.println("Not found.");
+        }
+    }
+
+
+
+
+
+    /*@GetMapping("/{id}/users")
     public List<User> getAllUsers(@PathVariable ("id") long id){
         return null;
     }
@@ -52,15 +118,12 @@ public class BillController {
         return null;
     }
 
-    // POST /
-    // POST /{id}/users
-    // POST /{id}/payers
-    // POST /{id}/debtors
 
-    @PostMapping("")
-    public Bill addBill(@RequestBody Bill bill){
-        return null;
-    }
+
+
+
+
+
 
     @PostMapping("/{id}/users")
     public Bill addUserToBill(@PathVariable("id") long id, @RequestBody User user){
@@ -78,15 +141,12 @@ public class BillController {
     }
 
 
-    // PUT /{id}
-    // PUT /{id}/users/{uid}
-    // PUT /{id}/debtors/{did}
-    // PUT /{id}/payers/{pid}
 
-    @PutMapping("/{id}")
-    public Bill updateBill(@PathVariable("id") long id, @RequestBody Bill bill){
-        return null;
-    }
+
+
+
+
+
 
     @PutMapping("/{id}/users/{uid}")
     public Bill updateUserFromBill(@PathVariable("id") long id, @PathVariable("uid") long uid,
@@ -107,21 +167,15 @@ public class BillController {
     }
 
 
-    // DELETE /
-    // DELETE /{id}
-    // DELETE /{id}/users/{uid}
-    // DELETE /{id}/payers/{pid}
-    // DELETE /{id}/debtors/{did}
 
-    @DeleteMapping("")
-    public void deleteAllBills(){
 
-    }
 
-    @DeleteMapping("/{id}")
-    public void deleteBillById(@PathVariable("id") long id){
 
-    }
+
+
+
+
+
 
     @DeleteMapping("/{id}/users/{uid}")
     public Bill deleteUserFromBill(@PathVariable("id") long id, @PathVariable("uid") long uid){
@@ -137,6 +191,5 @@ public class BillController {
     public Bill deletePayerFromBill(@PathVariable("id") long id, @PathVariable("pid") long pid){
         return null;
     }
-
-}
 */
+}

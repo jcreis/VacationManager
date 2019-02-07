@@ -79,7 +79,6 @@ public class UserController {
 
 
     //                ----------------------- D E L E T E S -----------------------
-    // DELETE /
     // DELETE /{id}
     // DELETE /{id}/debts/{did}
     // DELETE /{id}/toreceive/{trid}

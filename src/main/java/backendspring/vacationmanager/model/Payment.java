@@ -4,22 +4,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-//@Entity
+@Entity
 public class Payment {
 
-  //  @GeneratedValue @Id
+    @GeneratedValue @Id
     private long id;
 
     private double total;
 
-    private User fromUser;
+    /*private User fromUser;
 
-    private User toUser;
+    private User toUser;*/
 
-    public Payment(double total, User fromUser, User toUser) {
+    public Payment(double total/*, User fromUser, User toUser*/) {
         this.total = total;
-        this.fromUser = fromUser;
-        this.toUser = toUser;
+        /*this.fromUser = fromUser;
+        this.toUser = toUser;*/
     }
 
     public Payment() {
@@ -41,7 +41,7 @@ public class Payment {
         this.total = total;
     }
 
-    public User getFromUser() {
+    /*public User getFromUser() {
         return fromUser;
     }
 
@@ -55,5 +55,5 @@ public class Payment {
 
     public void setToUser(User toUser) {
         this.toUser = toUser;
-    }
+    }*/
 }
