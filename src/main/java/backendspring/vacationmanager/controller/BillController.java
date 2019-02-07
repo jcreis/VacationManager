@@ -1,3 +1,4 @@
+/*
 package backendspring.vacationmanager.controller;
 
 import backendspring.vacationmanager.model.Bill;
@@ -138,3 +139,4 @@ public class BillController {
     }
 
 }
+*/

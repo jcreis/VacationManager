@@ -1,30 +1,96 @@
 package backendspring.vacationmanager.controller;
 
-import backendspring.vacationmanager.model.Bill;
-import backendspring.vacationmanager.model.User;
 import backendspring.vacationmanager.model.Vacation;
+//import backendspring.vacationmanager.repository.VacationsRepository;
+import backendspring.vacationmanager.repository.VacationsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
+
 
 @RestController @RequestMapping("/vacations")
 public class VacationController {
 
+    @Autowired
+    VacationsRepository vacations;
+
     @GetMapping("")
-    public List<Vacation> getAllVacations(@RequestParam(required = false) String search){
+    public Iterable<Vacation> getAllVacations(@RequestParam(required = false) String search){
 
         // Get all the vacations on the system
-        return null;
+
+        System.out.println("this is a get with a list of all vacations on the system");
+
+        if(search == null) {
+            return vacations.findAll();
+        }
+        else{
+            return vacations.searchVacations(search);
+        }
+
     }
 
     @GetMapping("/{id}")
-    public Vacation getVacationById(@PathVariable("id") long id){
+    public Optional<Vacation> getVacationById(@PathVariable("id") long id){
 
         // Get vacation by {id}
-        return null;
+        System.out.println("vacation with id "+ id +" found");
+        return vacations.findById(id);
     }
 
-    @GetMapping("/{id}/users")
+    @PostMapping("")
+    public void createVacation(@RequestBody Vacation vacation){
+
+        // Create a new vacation in the system
+        System.out.println("vacation with title "+ vacation.getTitle() + " created");
+        vacations.save(vacation);
+
+    }
+
+    @PutMapping("/{id}")
+    public void updateVacation(@PathVariable("id") long id, @RequestBody Vacation vacation){
+
+        // Update an existent vacation
+        if(vacation.getId()==id) {
+            Optional<Vacation> old_v = vacations.findById(id);
+            if(old_v.isPresent()){
+                vacations.save(vacation);
+                System.out.println(vacation.getTitle()+" is updated");
+            }
+            else{
+                System.out.println("Not Found.");
+            }
+
+        }else{
+            System.out.println("Bad Request.");
+        }
+        return;
+    }
+
+
+
+    @DeleteMapping("/{id}")
+    public void deleteVacation (@PathVariable("id") long id){
+
+        // Delete vacation identified by {id} from the system
+        System.out.println("Vacation with id "+id+" will be deleted.");
+        Optional<Vacation> old_v=vacations.findById(id);
+        if(old_v.isPresent()){
+            vacations.delete(old_v.get());
+        }
+        else{
+            System.out.println("Not Found.");
+        }
+        return;
+    }
+
+
+
+
+
+
+    /*@GetMapping("/{id}/users")
     public List<User> getAllUsers(@PathVariable("id") long id, @RequestParam( required = false ) String search){
 
         // Get all the users from a vacation identified by {id}
@@ -35,13 +101,6 @@ public class VacationController {
     public List<Bill> getAllBills(@PathVariable("id") long id, @RequestParam(required = false) String search){
 
         // Get all the bills from a vacation identified by {id}
-        return null;
-    }
-
-    @PostMapping("")
-    public Vacation createVacation(@RequestBody Vacation vacation){
-
-        // Create a new vacation in the system
         return null;
     }
 
@@ -56,13 +115,6 @@ public class VacationController {
     public Vacation addBillToVacation(@PathVariable("id") long id, @RequestBody Bill bill){
 
         // Add a new bill in the vacation identified by {id}
-        return null;
-    }
-
-    @PutMapping("/{id}")
-    public Vacation updateVacation(@PathVariable("id") long id, @RequestBody Vacation vacation){
-
-        // Update an existent vacation
         return null;
     }
 
@@ -82,20 +134,6 @@ public class VacationController {
         return null;
     }
 
-    @DeleteMapping("")
-    public void deleteAllVacations (){
-
-        // Delete all vacations from the system
-
-    }
-
-    @DeleteMapping("/{id}")
-    public Vacation deleteVacation (@PathVariable("id") long id){
-
-        // Delete vacation identified by {id} from the system
-        return null;
-    }
-
     @DeleteMapping("/{id}/bills/{bid}")
     public Vacation deleteBillFromVacation (@PathVariable("id") long id, @PathVariable("bid") long bid){
         return null;
@@ -105,5 +143,6 @@ public class VacationController {
     public Vacation deleteUserFromVacation (@PathVariable("id") long id, @PathVariable("uid") long uid){
         return null;
     }
+*/
 
 }

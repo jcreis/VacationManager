@@ -8,17 +8,18 @@ import java.util.List;
 @Entity
 public class Vacation {
 
-    @GeneratedValue @Id
+    @GeneratedValue
+    @Id
     private long id;
 
     private String title;
     private String description;
 
     // List of users invited to the vacation
-    private List<User> userList;
+    //private List<User> userList;
 
     // List of bills during the vacation
-    private List<Bill> bills;
+    //private List<Bill> bills;
 
 
     public Vacation() {
@@ -48,7 +49,7 @@ public class Vacation {
         this.description = description;
     }
 
-    public List<User> getUserList() {
+    /*public List<User> getUserList() {
         return userList;
     }
 
@@ -63,11 +64,11 @@ public class Vacation {
     public void setBills(List<Bill> bills) {
         this.bills = bills;
     }
-
-    public Vacation(String title, String description, List<User> userList, List<Bill> bills) {
+*/
+    public Vacation(String title, String description/*, List<User> userList, List<Bill> bills*/) {
         this.title = title;
         this.description = description;
-        this.userList = userList;
-        this.bills = bills;
+        //this.userList = userList;
+        //this.bills = bills;
     }
 }

@@ -5,10 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.List;
 
-@Entity
+//@Entity
 public class User {
 
-    @GeneratedValue @Id
+    //@GeneratedValue @Id
     private long id;
 
     private String name, phoneNumber, email;

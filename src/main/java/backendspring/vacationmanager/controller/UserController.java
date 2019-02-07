@@ -2,12 +2,18 @@ package backendspring.vacationmanager.controller;
 
 import backendspring.vacationmanager.model.Payment;
 import backendspring.vacationmanager.model.User;
+import backendspring.vacationmanager.repository.UsersRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
+
 
 @RestController @RequestMapping("/users")
 public class UserController {
+
+    @Autowired
+    UsersRepository users;
 
     // GET /
     // GET /{id}
@@ -15,16 +21,60 @@ public class UserController {
     // GET /{id}/toreceive
 
     @GetMapping("")
-    public List<User> getAllUsers(@RequestParam (required = false) String search){
-        return null;
+    public Iterable<User> getAllUsers(@RequestParam(required = false) String search) {
+        if(search == null) {
+            return users.findAll();
+        }
+        else{
+            return users.searchUsers(search);
+        }
     }
 
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable("id") long id){
-        return null;
+    public Optional<User> getUserById(@PathVariable("id") long id) {
+        return users.findById(id);
     }
 
+    @PostMapping("")
+    public void createUser(@RequestBody User user) {
+        users.save(user);
+    }
+
+    @PutMapping("/{id}")
+    public void updateUser(@PathVariable("id") long id, @RequestBody User user) {
+        if (user.getId() == id) {
+            Optional<User> old_u = users.findById(id);
+            if (old_u.isPresent()){
+                users.save(user);
+            }
+            else{
+                System.out.println("Not found.");
+            }
+        }
+        else{
+            System.out.println("Bad Request");
+        }
+    }
+
+
+    @DeleteMapping("/{id}")
+    public void deleteUserById(@PathVariable("id") long id){
+        Optional<User> old_u = users.findById(id);
+        if(old_u.isPresent()){
+            users.delete(old_u.get());
+        }
+        else{
+            System.out.println("Not found.");
+
+        }
+        return;
+
+    }
+
+
+}
+    /*
     @GetMapping("/{id}/debts")
     public List<Payment> getDebtsFromUser(@PathVariable("id") long id){
         return null;
@@ -81,15 +131,7 @@ public class UserController {
     // DELETE /{id}/debts/{did}
     // DELETE /{id}/toreceive/{trid}
 
-    @DeleteMapping("")
-    public void deleteAllUsers(){
 
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteUserById(@PathVariable("id") long id){
-
-    }
 
     @DeleteMapping("/{id}/debts/{did}")
     public User deleteDebtFromUser(@PathVariable("id") long id, @PathVariable("did") long did){
@@ -102,3 +144,4 @@ public class UserController {
     }
 
 }
+*/

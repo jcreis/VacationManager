@@ -1,3 +1,4 @@
+/*
 package backendspring.vacationmanager.repository;
 
 
@@ -17,3 +18,4 @@ public interface PaymentsRepository extends CrudRepository<Payment, Long> {
     )
     Iterable<Payment> searchPayments(@Param(value = "search") String search);
 }
+*/

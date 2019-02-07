@@ -1,3 +1,4 @@
+/*
 package backendspring.vacationmanager.controller;
 
 import backendspring.vacationmanager.model.Payment;
@@ -53,3 +54,4 @@ public class PaymentController {
 
 
 }
+*/

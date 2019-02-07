@@ -11,9 +11,10 @@ public interface VacationsRepository extends CrudRepository<Vacation, Long> {
             + "FROM Vacation v "
             + "WHERE v.id LIKE CONCAT('%',:search,'%') "
             + "OR v.title LIKE CONCAT('%',:search,'%') "
-            + "OR v.text LIKE CONCAT('%',:search,'%') "
-            + "OR v.creationDate LIKE CONCAT('%',:search,'%') "
+            + "OR v.description LIKE CONCAT('%',:search,'%') "
     )
     Iterable<Vacation> searchVacations(@Param(value = "search") String search);
+
+    Iterable<Vacation> findByTitle(String title);
 }
 

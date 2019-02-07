@@ -1,3 +1,4 @@
+/*
 package backendspring.vacationmanager.repository;
 
 import backendspring.vacationmanager.model.Bill;
@@ -16,3 +17,4 @@ public interface BillsRepository extends CrudRepository<Bill, Long> {
     )
     Iterable<Bill> searchBills(@Param(value = "search") String search);
 }
+*/
