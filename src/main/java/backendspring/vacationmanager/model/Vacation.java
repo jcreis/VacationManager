@@ -1,25 +1,30 @@
 package backendspring.vacationmanager.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.List;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-@Entity
+@Entity @Table(name = "VACATIONS")
 public class Vacation {
 
     @GeneratedValue
     @Id
+    @Column(name = "id")
     private long id;
 
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "description")
     private String description;
 
     // List of users invited to the vacation
-    //private List<User> userList;
+    @OneToMany(mappedBy = "vacation")
+    private Set<User> userList = new HashSet<User>();
 
     // List of bills during the vacation
-    //private List<Bill> bills;
+    @OneToMany(mappedBy = "vacation")
+    private Set<Bill> bills = new HashSet<Bill>();
 
 
     public Vacation() {
@@ -49,26 +54,30 @@ public class Vacation {
         this.description = description;
     }
 
-    /*public List<User> getUserList() {
+    public Set<User> getUserList() {
         return userList;
     }
 
-    public void setUserList(List<User> userList) {
+    public void setUserList(Set<User> userList) {
         this.userList = userList;
     }
 
-    public List<Bill> getBills() {
+    public Set<User> addUser(User user){
+        System.out.println("User id: " + user.getId());
+        this.userList.add(user);
+        return userList;
+    }
+
+    public Set<Bill> getBills() {
         return bills;
     }
 
-    public void setBills(List<Bill> bills) {
+    public void setBills(Set<Bill> bills) {
         this.bills = bills;
     }
-*/
-    public Vacation(String title, String description/*, List<User> userList, List<Bill> bills*/) {
+
+    public Vacation(String title, String description) {
         this.title = title;
         this.description = description;
-        //this.userList = userList;
-        //this.bills = bills;
     }
 }

@@ -1,8 +1,11 @@
 package backendspring.vacationmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Bill {
@@ -14,18 +17,19 @@ public class Bill {
     private String description;
     private double price;
 
+    @ManyToOne @JsonIgnore
+    private Vacation vacation;
     // List of users who paid the bill in the first place
     //private List<User> payers;
 
     // List of users who have to pay the bill to the payers
     //private List<User> debtors;
 
-    public Bill(String title, String description, double price/*, List<User> payers, List<User> debtors*/) {
+    public Bill(String title, String description, double price) {
         this.title = title;
         this.description = description;
         this.price = price;
-        //this.payers = payers;
-        //this.debtors = debtors;
+
     }
 
     public Bill() {
@@ -62,7 +66,16 @@ public class Bill {
     public void setPrice(double price) {
         this.price = price;
     }
-/*
+
+    public Vacation getVacation() {
+        return vacation;
+    }
+
+    public void setVacation(Vacation vacation) {
+        this.vacation = vacation;
+    }
+
+    /*
     public List<User> getPayers() {
         return payers;
     }

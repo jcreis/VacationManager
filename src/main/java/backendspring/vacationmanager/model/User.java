@@ -1,17 +1,25 @@
 package backendspring.vacationmanager.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Entity
+import javax.persistence.*;
+
+@Entity @Table(name = "USERS")
 public class User {
 
     @GeneratedValue @Id
+    @Column(name = "id")
     private long id;
 
-    private String name, phoneNumber, email;
+    @Column(name = "name")
+    private String name;
+    @Column(name = "phone_number")
+    private String phoneNumber;
+    @Column(name = "email")
+    private String email;
+
+    @ManyToOne @JsonIgnore
+    private Vacation vacation;
 
     // List of payments the user has to pay
     //private List<Payment> debt;
@@ -25,15 +33,11 @@ public class User {
     // List of bills where the user is a payer (waiting to receive money)
     //private List<Bill> asPayer;
 
-    public User(String name, String phoneNumber, String email/*, List<Payment> debt, List<Payment> toReceive, List<Bill> asDebtor, List<Bill> asPayer*/) {
+    public User(String name, String phoneNumber, String email) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        /*this.debt = debt;
-        this.toReceive = toReceive;
-        this.asDebtor = asDebtor;
-        this.asPayer = asPayer;
-    */}
+    }
 
     public User() {
     }
@@ -69,7 +73,16 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-/*
+
+    public Vacation getVacation() {
+        return vacation;
+    }
+
+    public void setVacation(Vacation vacation) {
+        this.vacation = vacation;
+    }
+
+    /*
     public List<Payment> getDebt() {
         return debt;
     }

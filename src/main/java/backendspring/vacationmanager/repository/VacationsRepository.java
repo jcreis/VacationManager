@@ -15,6 +15,6 @@ public interface VacationsRepository extends CrudRepository<Vacation, Long> {
     )
     Iterable<Vacation> searchVacations(@Param(value = "search") String search);
 
-    Iterable<Vacation> findByTitle(String title);
+    //Iterable<Vacation> findByTitle(String title);
 }
 

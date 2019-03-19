@@ -1,10 +1,12 @@
 package backendspring.vacationmanager.controller;
 
+import backendspring.vacationmanager.model.User;
 import backendspring.vacationmanager.model.Vacation;
 import backendspring.vacationmanager.repository.VacationsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -94,17 +96,17 @@ public class VacationController {
         return;
     }
 
-
-
-
-
-
-    /*@GetMapping("/{id}/users")
+    @GetMapping("/{id}/users")
     public List<User> getAllUsers(@PathVariable("id") long id, @RequestParam( required = false ) String search){
 
         // Get all the users from a vacation identified by {id}
         return null;
     }
+
+
+
+
+    /*
 
     @GetMapping("/{id}/bills")
     public List<Bill> getAllBills(@PathVariable("id") long id, @RequestParam(required = false) String search){
