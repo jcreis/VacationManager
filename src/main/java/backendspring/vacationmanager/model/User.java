@@ -3,6 +3,8 @@ package backendspring.vacationmanager.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity @Table(name = "USERS")
 public class User {
@@ -28,10 +30,12 @@ public class User {
     //private List<Payment> toReceive;
 
     // List of bills where the user is a debtor (ows money)
-    //private List<Bill> asDebtor;
+    @ManyToMany(mappedBy = "debtors")
+    private Set<Bill> asDebtor = new HashSet<Bill>();
 
     // List of bills where the user is a payer (waiting to receive money)
-    //private List<Bill> asPayer;
+    @ManyToMany(mappedBy = "payers")
+    private Set<Bill> asPayer = new HashSet<Bill>();
 
     public User(String name, String phoneNumber, String email) {
         this.name = name;

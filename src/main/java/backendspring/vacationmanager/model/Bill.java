@@ -1,13 +1,11 @@
 package backendspring.vacationmanager.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
-@Entity
+@Entity @Table(name = "BILLS")
 public class Bill {
 
     @GeneratedValue @Id
@@ -19,11 +17,14 @@ public class Bill {
 
     @ManyToOne @JsonIgnore
     private Vacation vacation;
-    // List of users who paid the bill in the first place
-    //private List<User> payers;
 
+    // List of users who paid the bill in the first place
+    @ManyToMany
+    private Set<User> payers = new HashSet<User>();
+
+    @ManyToMany
     // List of users who have to pay the bill to the payers
-    //private List<User> debtors;
+    private Set<User> debtors = new HashSet<User>();
 
     public Bill(String title, String description, double price) {
         this.title = title;
@@ -75,20 +76,30 @@ public class Bill {
         this.vacation = vacation;
     }
 
-    /*
-    public List<User> getPayers() {
+
+    public Set<User> getPayers() {
         return payers;
     }
 
-    public void setPayers(List<User> payers) {
+    public void setPayers(Set<User> payers) {
         this.payers = payers;
     }
 
-    public List<User> getDebtors() {
+    public Set<User> addPayer(User payer){
+        this.payers.add(payer);
+        return payers;
+    }
+
+    public Set<User> getDebtors() {
         return debtors;
     }
 
-    public void setDebtors(List<User> debtors) {
+    public void setDebtors(Set<User> debtors) {
         this.debtors = debtors;
-    }*/
+    }
+
+    public Set<User> addDebtor(User debtor){
+        this.debtors.add(debtor);
+        return debtors;
+    }
 }

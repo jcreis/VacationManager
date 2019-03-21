@@ -63,7 +63,6 @@ public class Vacation {
     }
 
     public Set<User> addUser(User user){
-        System.out.println("User id: " + user.getId());
         this.userList.add(user);
         return userList;
     }
